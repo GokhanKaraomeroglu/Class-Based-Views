@@ -4,6 +4,10 @@ from .forms import StudentForm
 from .models import Student
 from django.views.generic import TemplateView
 from django.views.generic import ListView
+from django.views.generic import DetailView
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
+
 # Create your views here.
 
 def home(request):
@@ -29,6 +33,12 @@ class StudentListView(ListView):
     context_object_name = 'students' # default context name : object_list
     paginate_by = 10
 
+class StudentCreateView(CreateView):
+    model = Student
+    form_class = StudentForm
+    template_name = "fscohort/student_add.html" # default name app/modelname_form.html
+    success_url = reverse_lazy("list")
+
 def student_add(request):
     form = StudentForm()
     
@@ -45,6 +55,10 @@ def student_add(request):
     }
     
     return render(request, "fscohort/student_add.html", context)
+
+class StudentDetailView(DetailView):
+    model = Student
+    pk_url_kwarg = 'id'
 
 def student_detail(request,id):
     student = Student.objects.get(id=id)
