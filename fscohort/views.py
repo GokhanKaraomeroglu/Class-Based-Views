@@ -8,6 +8,7 @@ from django.views.generic import DetailView
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
+from django.views.generic import DeleteView
 
 # Create your views here.
 
@@ -110,3 +111,8 @@ def student_delete(request, id):
         "student":student
     }
     return render(request, "fscohort/student_delete.html",context)
+
+class StudentDeleteView(DeleteView):
+    model = StudentForm
+    template_name = "fscohort/student_delete.html"
+    success_url = reverse_lazy("list")

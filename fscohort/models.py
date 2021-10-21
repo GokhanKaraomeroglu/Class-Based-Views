@@ -20,6 +20,9 @@ class Student(models.Model):
     number = models.IntegerField(unique=True, blank=True, null=True)
     image = models.ImageField(upload_to="student/", default="avatar.png")
     
+    class Meta:
+        ordering = ['-id']
+    
     def __str__(self):
         return f"{self.number} {self.first_name} {self.last_name}"
 
