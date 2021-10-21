@@ -7,6 +7,7 @@ from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
+from django.views.generic import UpdateView
 
 # Create your views here.
 
@@ -31,7 +32,7 @@ class StudentListView(ListView):
     # this fits our template name no need to use this time
     # template_name = "fscohort/student_list.html"
     context_object_name = 'students' # default context name : object_list
-    paginate_by = 10
+    paginate_by = 5
 
 class StudentCreateView(CreateView):
     model = Student
@@ -67,6 +68,13 @@ def student_detail(request,id):
     }
     
     return render(request, "fscohort/student_detail.html", context)
+
+class StudentUpdateView(UpdateView):
+    model = Student
+    form_class = StudentForm
+    template_name = "fscohort/student_update.html" # default app/modelname_form.html
+    success_url = '/student_list/' #'reverse_lazy("list")
+    # pk_url_kwarg = 'id'
     
 def student_update(request, id):
     

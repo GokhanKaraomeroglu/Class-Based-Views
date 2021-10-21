@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import home,student_list, student_add, student_detail, student_update,student_delete
 # from django.views.generic import TemplateView
-from .views import HomeView, StudentListView,StudentDetailView, StudentCreateView
+from .views import HomeView, StudentListView,StudentDetailView, StudentCreateView, StudentUpdateView
 
 urlpatterns = [
     # path('', TemplateView.as_view(template_name= "fscohort/home.html"), name="home"),
@@ -12,7 +12,8 @@ urlpatterns = [
     path('student_add/', StudentCreateView.as_view(), name="add"),
     # path('detail/<int:id>/', student_detail, name="detail"),
     path('detail/<int:id>/', StudentDetailView.as_view(), name="detail"),
-    path('update/<int:id>/', student_update, name="update"),
+    # path('update/<int:id>/', student_update, name="update"),
+    path('update/<int:pk>/', StudentUpdateView.as_view(), name="update"),
     path('delete/<int:id>/', student_delete, name="delete"),
 ]  
  
